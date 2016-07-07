@@ -4,9 +4,10 @@ class SurveyProtocolsController < ApplicationController
 
   def index
     @survey_protocols = SurveyProtocol.all
+    attributes_to_include = %w(title sample_fields entry_fields)
     respond_to do |format|
       format.html
-      format.csv { send_data @survey_protocols.to_csv }
+      format.csv { send_data @survey_protocols.to_csv(attributes_to_include) }
     end
   end
 
